@@ -1,0 +1,66 @@
+﻿@model DOAN_LTW_HVC.Models.SANPHAM
+@{
+    ViewBag.Title = "Cập nhật sản phẩm";
+}
+<div class="container">
+    @using (Html.BeginForm("update", "products", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row my-3 py-3">
+            <div class="col-12 col-md-6">
+                @Html.HiddenFor(row => row.MASP)
+                @Html.LabelFor(row => row.TENSP, "Tên sản phẩm")
+                @Html.TextBoxFor(row => row.TENSP, new { @class = "form-control", placeholder = "Nhập tên sản phẩm" })
+                @Html.ValidationMessageFor(row => row.TENSP)
+            </div>
+            <div class="col-12 col-md-6">
+                @Html.LabelFor(row => row.LAYOUT, "Layout")
+                @Html.DropDownListFor(row => row.LAYOUT, new List<SelectListItem>()
+           {
+               new SelectListItem() {Text = "Không layout", Value = "Không layout"},
+               new SelectListItem() {Text = "ARISU 65%", Value = "ARISU 65%"},
+               new SelectListItem() {Text = "65%", Value = "65%"},
+               new SelectListItem() {Text = "75%", Value = "75%"},
+               new SelectListItem() {Text = "TKL", Value = "TKL"},
+               new SelectListItem() {Text = "1800 COMPACT", Value = "1800 COMPACT"},
+               new SelectListItem() {Text = "FULLSIZE", Value = "FULLSIZE"}
+           }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(row => row.LAYOUT)
+            </div>
+        </div>
+        <div class="row my-3 py-3">
+            <div class="col-12 col-md-6">
+                @Html.LabelFor(row => row.GIA, "Giá")
+                @Html.TextBoxFor(row => row.GIA, new { @class = "form-control", placeholder = "Nhập giá" })
+                @Html.ValidationMessageFor(row => row.GIA)
+            </div>
+            <div class="col-12 col-md-6">
+                @Html.LabelFor(row => row.MOTA, "Mô tả")
+                @Html.TextBoxFor(row => row.MOTA, new { @class = "form-control", placeholder = "Nhập mô tả sản phẩm" })
+                @Html.ValidationMessageFor(row => row.MOTA)
+            </div>
+        </div>
+        <div class="row my-3 py-3">
+            <div class="col-12 col-md-6">
+                @Html.LabelFor(row => row.DUONGDAN, "Đường dẫn")
+                <input type="file" name="imagefile" id="imagefile" class="form-control"/>
+                @Html.ValidationMessageFor(row => row.DUONGDAN)
+            </div>
+            <div class="col-12 col-md-6">
+                @Html.LabelFor(row => row.MALOAI)
+                @Html.DropDownListFor(row => row.MALOAI, new SelectList(ViewBag.loai, "MALOAI", "TENLOAI"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(row => row.MALOAI)
+            </div>
+        </div>
+        <div class="row my-3 py-3">
+            <div class="col-12 col-md-6">
+                @Html.LabelFor(row => row.MATH)
+                @Html.DropDownListFor(row => row.MATH, new SelectList(ViewBag.thuonghieu, "MATH", "TENTH"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(row => row.MATH)
+            </div>
+            <div class="col-12 col-md-6">
+                <button class="btn btn-success my-4" type="submit">Save</button>
+                <a class="btn btn-danger" href="/admin/products/index">Cancel</a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,107 @@
+﻿@model List<DOAN_LTW_HVC.Models.SANPHAM>
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+}
+<div class="container">
+    <div class="container d-flex flex-wrap">
+        <ul class="nav me-auto row">
+            <li class="nav-item col-2"><a href="/admin/products" class="nav-link link-body-emphasis px-2">All</a></li>
+            <li class="nav-item col-2"><a href="/admin/products/loaisp?loai=4" class="nav-link link-body-emphasis px-2">Keyboard</a></li>
+            <li class="nav-item col-2"><a href="/admin/products/loaisp?loai=1" class="nav-link link-body-emphasis px-2">Kit</a></li>
+            <li class="nav-item col-2"><a href="/admin/products/loaisp?loai=3" class="nav-link link-body-emphasis px-2">Switch</a></li>
+            <li class="nav-item col-2"><a href="/admin/products/loaisp?loai=2" class="nav-link link-body-emphasis px-2">Keycap</a></li>
+            <li class="nav-item col-2 ms-auto">
+                <form action="/admin/products/index" method="post" class="d-flex" role="search">
+                    <input class="form-control me-2 border-black-50" value="@ViewBag.search" name="search" style="width:330px; height: 40px; border-radius: 0" type="search" placeholder="Search" aria-label="Search">
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div class="my-3">
+        <a href="/admin/products/create" class="text-decoration-none">Thêm sản phẩm</a>
+    </div>
+    <table class="table table-bordered proTable">
+        @*<button class="btn btn-sm" type="button" id="getProducts" style="border-radius: 2px;">Get products</button>*@
+        <thead>
+            <tr>
+                <th scope="col">Mã sp</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Sản phẩm</th>
+                <th scope="col">Layout</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Thương hiệu</th>
+                <th scope="col">Loại</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(row => item.MASP)</td>
+                    @if (item.DUONGDAN == "")
+                    {
+                        <td><img src="\Images\No_Image.jpg" width="150px" /></td>
+                    }
+                    else
+                    {
+                        <td><img src="\Images\@item.DUONGDAN" width="150px" /></td>
+                    }
+                    <td>@Html.DisplayFor(row => item.TENSP)</td>
+                    <td>@Html.DisplayFor(row => item.LAYOUT)</td>
+                    <td>@Html.DisplayFor(row => item.GIA)</td>
+                    <td>@Html.DisplayFor(row => item.MOTA)</td>
+                    <td>@Html.DisplayFor(row => item.THUONGHIEU.TENTH)</td>
+                    <td>@Html.DisplayFor(row => item.LOAISANPHAM.TENLOAI)</td>
+                    <td>
+                        <a href="/admin/products/update/@item.MASP" class="text-decoration-none">Update</a> | <a href="/admin/products/delete/@item.MASP" class="text-decoration-none">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link text-danger" href="/admin/products/Loaisp?loai=@ViewBag.loaisp&page=1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                {
+                    <li class="page-item">
+                        <a class="page-link text-danger" href="/admin/products/Loaisp?loai=@ViewBag.loaisp&page=@(i+1)">@(i+1)</a>
+                    </li>
+                }
+                <li class="page-item">
+                    <a class="page-link text-danger" href="/admin/products/Loaisp?loai=@ViewBag.loaisp&page=@ViewBag.NoOfPages" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+@*<script>
+        $('#getProducts').click(() => {
+            $.ajax({
+                type: 'GET',
+                url: '/api/products',
+                success: (responses) => {
+                    for (var i = 0; i <= responses.length; i++) {
+                        const productsRow = responses[i];
+                        const strHTML = '<tr><td>' + productsRow.DUONGDAN + '</td><td>'
+                            + productsRow.TENSP + '</td><td>' + productsRow.GIA +
+                            //'</td><td>'
+                            //+ productsRow.MOTA + '</td><td>' + productsRow.THUONGHIEU.TENTH + '</td><td>'
+                            //+ productsRow.LOAISANPHAM.TENLOAI +
+                            '</td></tr>';
+                        $('.proTable').append(strHTML);
+                    }
+                },
+                error: (err) => { console.log(err) }
+            });
+        });
+    </script>*@

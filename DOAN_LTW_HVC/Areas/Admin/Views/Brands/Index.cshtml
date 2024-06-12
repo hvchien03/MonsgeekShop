@@ -1,0 +1,24 @@
+﻿@model List<DOAN_LTW_HVC.Models.THUONGHIEU>
+@{
+    ViewBag.Title = "Brands";
+}
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Mã thương hiệu</th>
+                <th scope="col">Tên thương hiệu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(row => item.MATH)</td>
+                    <td>@Html.DisplayFor(row => item.TENTH)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

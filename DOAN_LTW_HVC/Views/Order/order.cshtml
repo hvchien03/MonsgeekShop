@@ -1,0 +1,58 @@
+﻿@model List<DOAN_LTW_HVC.Models.GIOHANG>
+@{
+    ViewBag.Title = "Đặt hàng";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-around my-5">
+        <h4 class="text-center py-3">Thanh toán</h4>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Sản phẩm</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Giá</th>
+                </tr>
+            </thead>
+            @{int i = 1; int Thanhtien = 0;}
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="vertical-align: middle;">@i</td>
+                        @{
+                            i++;
+                            Thanhtien += item.ToTal;
+                        }
+                        <td style="padding: 10px;"><img src="\Images\@item.SANPHAM.DUONGDAN" width="80px" />@item.SANPHAM.TENSP</td>
+                        <td style="vertical-align: middle;">@item.SL</td>
+                        <td style="vertical-align: middle;">@Html.DisplayFor(r => item.ToTal)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row justify-content-end mt-3">
+            <div class="col-8 col-md-4">
+                <h4>Tổng cộng: @Thanhtien.ToString("N0") VND</h4>
+                <form action="/order/order" method="post">
+                    <div class="border-top border-primary bg-white my-5 pb-2">
+                        <h4 class="text-primary mt-2 ms-3">Phương thức thanh toán</h4>
+                        <ul class="d-flex">
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" value="Thanh toán bằng ví momo" name="PayMethod">
+                                <label class="form-check-label" for="firstCheckbox">Thanh toán bằng ví momo</label>
+                            </li>
+                            <li class="list-group-item ms-3">
+                                <input class="form-check-input me-1" type="radio" value="Thanh toán khi nhận hàng" name="PayMethod">
+                                <label class="form-check-label" for="secondCheckbox">Thanh toán khi nhận hàng</label>
+                            </li>
+                        </ul>
+                        <button type="submit" class="btn btn-dark btn-block mt-3">Đặt hàng</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

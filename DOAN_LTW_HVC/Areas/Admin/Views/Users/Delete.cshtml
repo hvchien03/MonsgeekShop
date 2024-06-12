@@ -1,0 +1,33 @@
+﻿@model DOAN_LTW_HVC.Identity.AppUser
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="container">
+    <div class="row justify-content-around">
+        @using (Html.BeginForm("delete", "users", new { UserName = Model.UserName }, FormMethod.Post))
+        {
+            <div class="col-md-6 py-3 my-3 mx-auto">
+                <h3 class="text-center py-3">Delete Account</h3>
+                <div class="col-12 py-3">
+                    @Html.TextBoxFor(model => model.UserName, new {@class = "form-control rounded-0", @readonly = "readonly" })
+                </div>
+                <div class="col-12 py-3">
+                    @Html.TextBoxFor(row => row.Email, new {@class = "form-control rounded-0", @readonly = "readonly" })
+                </div>
+                <div class="col-12 py-3">
+                    @Html.TextBoxFor(row => row.PhoneNumber, new {@class = "form-control rounded-0", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(row => row.PhoneNumber)
+                </div>
+                <div class="col-12 py-3">
+                    @Html.TextBoxFor(row => row.DIACHI, new {@class = "form-control rounded-0", @readonly = "readonly" })
+                </div>
+                <div class="col-12 py-3">
+                    <button class="btn d-block btn-dark form-control" type="submit" style="border-radius: 0;" />Delete
+                </div>
+                <div class="col-12 py-3">
+                    <a href="@Url.Action("Index")" class="btn btn-danger w-100" style="border-radius: 0;">Cancel</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

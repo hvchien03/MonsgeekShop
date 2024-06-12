@@ -1,0 +1,35 @@
+﻿@model List<DOAN_LTW_HVC.Identity.AppUser>
+@{
+    ViewBag.Title = "Users";
+}
+<div class="container">
+    <table class="table table-bordered">
+        <div class="my-3">
+            <a href="/admin/users/create" class="text-decoration-none">Thêm User</a>
+        </div>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.DIACHI</td>
+                    <td>
+                        <a href="@Url.Action("Update", "Users", new { UserName = item.UserName })" class="text-decoration-none">Update</a> |
+                        <a href="@Url.Action("Delete", "Users", new { UserName = item.UserName })" class="text-decoration-none">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

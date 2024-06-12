@@ -1,0 +1,36 @@
+﻿@model DOAN_LTW_HVC.ViewModel.UpdateVM
+@{
+    ViewBag.Title = "update";
+}
+<div class="container">
+    <div class="row justify-content-around">
+        @using (Html.BeginForm("update", "users", FormMethod.Post))
+        {
+            <div class="col-md-6 py-3 my-3 mx-auto">
+                <h3 class="text-center py-3">Update Account</h3>
+                <div class="col-12 py-3">
+                    @Html.HiddenFor(model => model.Username)
+                    @Html.TextBoxFor(row => row.Username, new { @class = "form-control rounded-0", @readonly = "readonly" })
+                </div>
+                <div class="col-12 py-3">
+                    @Html.TextBoxFor(row => row.Email, new { placeholder = "Email", @class = "form-control rounded-0"})
+                    @Html.ValidationMessageFor(row => row.Email)
+                </div>
+                <div class="col-12 py-3">
+                    @Html.TextBoxFor(row => row.PhoneNumber, new { placeholder = "Phone Number", @class = "form-control rounded-0"})
+                    @Html.ValidationMessageFor(row => row.PhoneNumber)
+                </div>
+                <div class="col-12 py-3">
+                    @Html.TextBoxFor(row => row.Address, new { placeholder = "Address", @class = "form-control rounded-0"})
+                    @Html.ValidationMessageFor(row => row.Address)
+                </div>
+                <div class="col-12 py-3">
+                    <button class="btn d-block btn-dark form-control" type="submit" style="border-radius: 0;" />Update
+                </div>
+                <div class="col-12 py-3">
+                    <a class="btn btn-danger w-100" style="border-radius: 0;" href="/admin/users/index">Cancel</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
